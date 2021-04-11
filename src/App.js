@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Post from './Post';
+import { db } from './firebase';
 
 function App() {
 
-    const [posts, setPosts] = useState([
-        {
-            username: "swapnilhota",
-            caption: "learning React",
-            imageUrl: "https://images.unsplash.com/photo-1615069433711-41e14f250182?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        },
-        {
-            username: "swapnilhota",
-            caption: "learning React",
-            imageUrl: "https://images.unsplash.com/photo-1615069433711-41e14f250182?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        }
-    ]);
+    const [posts, setPosts] = useState([]);
+
+    // useEffect => runs a piece of code based on a specific condition
+
+    useEffect(() => {
+        // this is where the code runs
+        db.collection('posts').onSnapshot(snapshot => {
+            // every time a new post is added, this code fires
+            setPosts(snapshot.docs.map(doc => ({
+                id: doc.id,
+                post: doc.data()
+            })));
+        })
+    }, []);
 
     return (
         <div className="App">
@@ -31,8 +34,8 @@ function App() {
             <h1>Hello Clever Programmers Let's build an Insta clone with React</h1>
 
             {
-                posts.map(post => (
-                    <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+                posts.map(({ id, post }) => (
+                    <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
                 ))
             }
 
