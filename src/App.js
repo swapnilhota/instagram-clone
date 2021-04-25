@@ -74,7 +74,7 @@ function App() {
 
         auth.createUserWithEmailAndPassword(email, password)
             .then((authUser) => {
-                authUser.user.updateProfile({
+                return authUser.user.updateProfile({
                     displayName: username
                 })
             })
@@ -128,7 +128,11 @@ function App() {
                 />
             </div>
 
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            {user ? (
+                <Button onClick={() => auth.signOut()}>Logout</Button>
+            ) : (
+                <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            )}
 
             <h1>Hello Clever Programmers Let's build an Insta clone with React</h1>
 
