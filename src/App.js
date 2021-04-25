@@ -80,6 +80,17 @@ function App() {
                 })
             })
             .catch((error) => alert(error.message));
+
+        setOpen(false); //closes modal
+    }
+
+    const signIn = (event) => {
+        event.preventDefault();
+
+        auth.signInWithEmailAndPassword(email, password)
+            .catch((error) => alert(error.message));
+
+        setOpenSignIn(false); //closes modal
     }
 
     return (
