@@ -62,7 +62,8 @@ function App() {
 
     useEffect(() => {
         // this is where the code runs
-        db.collection('posts').onSnapshot(snapshot => {
+        //orderby helps to keep the time online in order, latest post shows up first
+        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
             // every time a new post is added, this code fires
             setPosts(snapshot.docs.map(doc => ({
                 id: doc.id,
@@ -97,7 +98,12 @@ function App() {
     return (
         <div className="App">
 
-            <ImageUpload />
+            {user?.displayName ? (
+                <ImageUpload username={user.displayName} />
+            ) : (
+                <h3>Login to Upload</h3>
+            )}
+
 
             <Modal
                 open={open}
