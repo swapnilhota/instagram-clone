@@ -98,13 +98,6 @@ function App() {
     return (
         <div className="App">
 
-            {user?.displayName ? (
-                <ImageUpload username={user.displayName} />
-            ) : (
-                <h3>Login to Upload</h3>
-            )}
-
-
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}
@@ -195,6 +188,12 @@ function App() {
                     <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
                 ))
             }
+
+            {user?.displayName ? (
+                <ImageUpload username={user.displayName} />
+            ) : (
+                <h3>Login to Upload</h3>
+            )}
 
         </div>
     );
