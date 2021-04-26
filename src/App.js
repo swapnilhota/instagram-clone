@@ -180,15 +180,14 @@ function App() {
                 )}
             </div>
 
+            <div className="app__posts">
+                {
+                    posts.map(({ id, post }) => (
+                        <Post key={id} postId={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+                    ))
+                }
+            </div>
 
-
-            <h1>Hello Clever Programmers Let's build an Insta clone with React</h1>
-
-            {
-                posts.map(({ id, post }) => (
-                    <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
-                ))
-            }
 
             {user?.displayName ? (
                 <ImageUpload username={user.displayName} />
