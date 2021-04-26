@@ -170,16 +170,17 @@ function App() {
                     src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                     alt=""
                 />
+                {user ? (
+                    <Button onClick={() => auth.signOut()}>Logout</Button>
+                ) : (
+                    <div className="app__loginContainer">
+                        <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+                        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+                    </div>
+                )}
             </div>
 
-            {user ? (
-                <Button onClick={() => auth.signOut()}>Logout</Button>
-            ) : (
-                <div className="app__loginContainer">
-                    <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-                    <Button onClick={() => setOpen(true)}>Sign Up</Button>
-                </div>
-            )}
+
 
             <h1>Hello Clever Programmers Let's build an Insta clone with React</h1>
 
