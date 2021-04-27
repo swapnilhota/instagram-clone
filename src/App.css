@@ -21,6 +21,8 @@
 
 .app__posts {
   padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .app__signup {
